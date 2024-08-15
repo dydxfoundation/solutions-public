@@ -86,36 +86,25 @@ async function test(): Promise<void> {
 
     await sleep(5000);  // wait for placeOrder to complete
 
-    const address = process.env.ADDRESS || 'dydx14zzueazeh0hj67cghhf9jypslcf9sh2n5k6art';
-    console.log(address)
-    const response = await indexerClient.account.getSubaccountOrders(address, 0);
-    const orders = response;
-    if (orders.length > 0) {
-      const order0 = orders[0];
-      console.log(order0);
-      if (order0.status !== 'FILLED') {
-        await sleep(300000);  // wait for placeOrder to complete
+      const goodTillTimeInSeconds2 = 350;
+      const orderFlags = OrderFlags.LONG_TERM;
+      const goodTillBlock = 0;
+      try {
+        const tx = await client.cancelOrder(
+          subaccount,
+          clientId,
+          orderFlags,
+          market,
+          goodTillBlock,
+          goodTillTimeInSeconds2,
+        );
+        console.log('**Cancel Order Tx**');
+        console.log(tx);
 
-        const goodTillTimeInSeconds2 = 350;
-        const orderFlags = OrderFlags.LONG_TERM;
-        const goodTillBlock = 0;
-        try {
-          const tx = await client.cancelOrder(
-            subaccount,
-            clientId,
-            orderFlags,
-            market,
-            goodTillBlock,
-            goodTillTimeInSeconds2,
-          );
-          console.log('**Cancel Order Tx**');
-          console.log(tx);
-
-        } catch (error) {
-          console.log(error.message);
-        }
+      } catch (error) {
+        console.log(error.message);
       }
-    }
+
   }
 }
 

@@ -17,8 +17,8 @@ function test(): void {
     network = Network.testnet();
   }
 
-  const mySocket = new SocketClient(
-    network.indexerConfig,
+const mySocket = new SocketClient(
+  network.indexerConfig,
     () => {
       console.log('socket opened');
     },
@@ -32,14 +32,20 @@ function test(): void {
         try {
           const data = JSON.parse(jsonString);
           if (data.type === IncomingMessageTypes.CONNECTED) {
-            // mySocket.subscribeToMarkets(); // Check market prices
-            mySocket.subscribeToSubaccount(address, 0);
-            console.log(data);
+            // mySocket.subscribeToMarkets();
+            mySocket.subscribeToOrderbook('ETH-USD');
+            // mySocket.subscribeToTrades('ETH-USD');
+            // mySocket.subscribeToCandles('ETH-USD', CandlesResolution.FIFTEEN_MINUTES);
+            // mySocket.subscribeToSubaccount(DYDX_TEST_ADDRESS, 0);
           }
+          console.log(data);
         } catch (e) {
           console.error('Error parsing JSON message:', e);
         }
       }
+    },
+    (event) => {
+      console.error('Encountered error:', event.message);
     },
   );
   mySocket.connect();
