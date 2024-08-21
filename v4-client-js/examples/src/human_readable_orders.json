@@ -1,22 +1,22 @@
 [
-  {
-    "market": "BTC-USD",
-    "type": "LIMIT",
-    "timeInForce": "GTT",
-    "postOnly": false,
-    "reduceOnly": false,
-    "side": "SELL",
-    "price": 60000,
-    "size": 0.01
-  },
-  {
-    "market": "BTC-USD",
-    "type": "LIMIT",
-    "timeInForce": "GTT",
-    "postOnly": false,
-    "reduceOnly": false,
-    "side": "SELL",
-    "price": 70000,
-    "size": 0.01
-  }
+	{
+		"market": "BTC-USD",
+		"type": "LIMIT",
+		"timeInForce": "GTT",
+		"postOnly": false,
+		"reduceOnly": false,
+		"side": "SELL",
+		"price": 60000,
+		"size": 0.01
+	},
+	{
+		"market": "BTC-USD",
+		"type": "LIMIT",
+		"timeInForce": "GTT",
+		"postOnly": false,
+		"reduceOnly": false,
+		"side": "SELL",
+		"price": 70000,
+		"size": 0.01
+	}
 ]
